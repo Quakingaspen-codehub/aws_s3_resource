@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="aws-s3-resource",
-    version="0.0.4",
+    version="0.0.5",
     author="Quaking Aspen",
     author_email="info@quakingaspen.net",
     license='MIT',
