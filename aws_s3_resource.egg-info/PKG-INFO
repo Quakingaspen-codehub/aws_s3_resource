@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: aws-s3-resource
+Version: 0.0.2
+Summary: This library is to ease the operations done on AWS S3 buckets and objects
+Home-page: https://github.com/Samer92/aws-s3-resource
+Author: Muhammad Samer Sallam
+Author-email: samersallam92@gmail.com
+License: MIT
+Description: 
+        
+        # aws-s3-resource
+        
+        This library is to ease the operations done on AWS S3 buckets and objects
+         
+        In order to install, open the command prompt and type:
+        ```
+        pip install aws_s3_resource
+        ```
+        
+        In order to use refer to the following [example](https://github.com/Samer92/aws-s3-resource/blob/master/Example/aws_example.ipynb)
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
