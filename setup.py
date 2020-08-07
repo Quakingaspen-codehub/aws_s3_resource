@@ -3,9 +3,10 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+
 setuptools.setup(
     name="aws-s3-resource",
-    version="0.0.7",
+    version="0.0.8",
     author="Quaking Aspen",
     author_email="info@quakingaspen.net",
     license='MIT',
@@ -21,5 +22,5 @@ setuptools.setup(
     ],
     platform=['Any'],
     python_requires='>=3.6',
-    install_requires=['boto3']
+    install_requires=['boto3', 'botocore']
 )
