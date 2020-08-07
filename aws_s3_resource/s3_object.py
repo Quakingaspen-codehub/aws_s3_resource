@@ -104,17 +104,17 @@ class S3Object(S3):
     def num_objects(cls, bucket_name):
         return len(cls.list_all(bucket_name, False))
 
-    @staticmethod
-    def generate_presigned_url(bucket_name, object_name, expiration):
+    @classmethod
+    def generate_presigned_url(cls, bucket_name, object_name, expiration):
         """Generate a presigned URL to share an S3 object    :param bucket_name: string
         :param object_name: string
         :param expiration: Time in seconds for the presigned URL to remain valid
         :return: Presigned URL as string. If error, returns None.
         """
-        s3_client = boto3.client('s3')
-        response = s3_client.generate_presigned_url('get_object',
-                                                    Params={'Bucket': bucket_name,
-                                                            'Key': object_name},
-                                                    ExpiresIn=expiration)
+
+        response = cls.resource.meta.client.generate_presigned_url('get_object',
+                                                                   Params={'Bucket': bucket_name,
+                                                                           'Key': object_name},
+                                                                   ExpiresIn=expiration)
 
         return response
