@@ -33,7 +33,7 @@ class S3Bucket(S3):
 
         # Create the bucket
         cls.resource.create_bucket(Bucket=bucket_name,
-                          CreateBucketConfiguration={'LocationConstraint': region})
+                          CreateBucketConfiguration={'LocationConstraint': os.environ['AWS_REGION_NAME']})
     
     @classmethod
     def create_with_random_name_suffix(cls, bucket_name, num_random_chars=6):
