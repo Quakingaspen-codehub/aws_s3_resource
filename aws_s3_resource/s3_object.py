@@ -69,24 +69,25 @@ class S3Object(S3):
         return cls.resource.meta.client.delete_object(Bucket=bucket_name, Key=object_key)
 
     @classmethod
-    def list_all(cls, bucket_name, as_generator):
-        bucket = cls.resource.Bucket(bucket_name)
-        objects = bucket.objects.all()
-
-        if as_generator:
-            return objects
-
-        return list(objects)
-
-    @classmethod
-    def list_all_keys(cls, bucket_name, as_generator):
-        objects = cls.list_all(bucket_name, as_generator=True)
-        objects_keys = (obj.key for obj in objects)
-
-        if as_generator:
-            return objects_keys
-
-        return list(objects_keys)
+    def list_all(cls, bucket_name, prefix=None, extensions=None, keys_only=True, as_generator=False):
+    
+        """
+        bucket_name: string
+        prefix: string
+        extensions: tuple of strings
+        keys_only: bool
+        as_generator: bool
+        """
+        
+        bucket = cls.resource.Bucket(bucket_name)  
+        
+        objects = bucket.objects.all() if prefix is None else bucket.objects.filter(Prefix=prefix)
+        
+        objects = objects if extensions is None else (obj for obj in objects if obj.key.endswith(extensions))
+        
+        objects = objects if not keys_only else (obj.key for obj in objects)
+        
+        return objects if as_generator else list(objects)
 
     @classmethod
     def is_available(cls, bucket_name, object_key):
