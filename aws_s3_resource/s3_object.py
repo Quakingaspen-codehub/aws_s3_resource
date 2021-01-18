@@ -3,6 +3,7 @@ import uuid
 
 import boto3
 from botocore.client import ClientError
+from pathlib import Path
 
 from . import S3
 from .s3_bucket_error import NumberRandomCharsException
@@ -63,7 +64,18 @@ class S3Object(S3):
         else:
             raise NotImplementedError(
                 'The "file_dict" parameters should include file_obj, file_path, or empty dict to return the file bytes')
+    
+    @classmethod
+    def download_all(cls, bucket_name, objects_keys, local_path):
+        local_files_paths = [os.path.join(local_path, os.path.split(obj_key)[-1])
+                                                 for obj_key in objects_keys]
 
+        for obj_key, local_file_path in zip(objects_keys, local_files_paths):
+            Path(os.path.join(*os.path.split(local_file_path)[:-1])).mkdir(parents=True, exist_ok=True)
+
+            file_dict = {'file_path': local_file_path}
+            cls.download(bucket_name, obj_key, file_dict)
+    
     @classmethod
     def delete(cls, bucket_name, object_key):
         return cls.resource.meta.client.delete_object(Bucket=bucket_name, Key=object_key)

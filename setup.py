@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="aws-s3-resource",
-    version="0.0.12",
+    version="0.0.13",
     author="Quaking Aspen",
     author_email="info@quakingaspen.net",
     license='MIT',
@@ -22,5 +22,5 @@ setuptools.setup(
     ],
     platform=['Any'],
     python_requires='>=3.6',
-    install_requires=['boto3', 'botocore']
+    install_requires=['boto3', 'botocore', 'pathlib']
 )
